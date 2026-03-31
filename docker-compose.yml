@@ -1,0 +1,16 @@
+version: "3.9"
+
+services:
+  ml-api:
+    build: .
+    container_name: cogniscreen_ml
+    ports:
+      - "8000:8000"
+    env_file:
+      - .env
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/health", "-H", "X-ML-API-Key:${ML_API_KEY}"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
