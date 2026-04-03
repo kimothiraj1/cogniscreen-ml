@@ -27,7 +27,7 @@ def score_daily(game_score: float, chat_score: float,
         webcam_score * WEIGHTS["webcam"] +
         task_risk    * WEIGHTS["task"]
     )
-    return max(0.0, min(100.0, composite))
+    return round(max(0.0, min(100.0, composite))/100,4)
 
 
 def get_stage(composite_score: float, trend_slope: float) -> tuple:
@@ -42,19 +42,19 @@ def get_stage(composite_score: float, trend_slope: float) -> tuple:
     Positive = worsening over 7 days.
     """
 
-    if composite_score < 25 and trend_slope < 0.3:
+    if composite_score < 0.25 and trend_slope < 0.3:
         return 0, (
             "No significant cognitive indicators detected. "
             "Continue daily activities and check in regularly."
         )
 
-    elif composite_score < 45 or trend_slope < 0.5:
+    elif composite_score < 0.45 or trend_slope < 0.5:
         return 1, (
             "Mild indicators observed. This may reflect a temporary off day. "
             "Monitor closely over the next week and maintain daily activities."
         )
 
-    elif composite_score < 70 or trend_slope < 1.0:
+    elif composite_score < 0.70 or trend_slope < 1.0:
         return 2, (
             "Moderate cognitive indicators detected across multiple sessions. "
             "We recommend discussing these results with a general practitioner."
