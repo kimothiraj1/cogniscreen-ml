@@ -27,7 +27,7 @@ def score_game(test_type: str, score: float, time_taken_ms: int,
     time_penalty = _calc_time_penalty(time_taken_ms, test_type)
 
     raw = (base_risk * age_multiplier) + hesitation_penalty + error_penalty + time_penalty
-    return max(0.0, min(100.0, raw))
+    return round(max(0.0, min(100.0, raw))/100,4)
 
 
 def _get_age_multiplier(age: int) -> float:
