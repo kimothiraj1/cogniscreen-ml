@@ -32,7 +32,7 @@ def score_chat(avg_wpm: float, wpm_delta: float, backspace_rate: float,
     slow_penalty = _calc_slow_wpm_penalty(avg_wpm)
 
     raw = wpm_risk + backspace_risk + repetition_risk + sentiment_risk + slow_penalty
-    return max(0.0, min(100.0, raw))
+    return round(max(0.0, min(100.0, raw))/100.0,4)
 
 
 def _calc_wpm_risk(wpm_delta: float) -> float:
