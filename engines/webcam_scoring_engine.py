@@ -33,7 +33,7 @@ def score_webcam(dominant_emotion: str, emotion_confidence: float,
     gaze_risk = _calc_gaze_risk(gaze_stability_score)
 
     raw = emotion_risk + blink_risk + gaze_risk
-    return max(0.0, min(100.0, raw))
+    return round(max(0.0, min(100.0, raw))/100,4)
 
 
 def _calc_emotion_risk(emotion: str, confidence: float) -> float:
